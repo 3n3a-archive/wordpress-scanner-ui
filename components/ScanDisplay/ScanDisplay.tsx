@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useSharedState } from '../../store/main';
-import { Router, useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 
-function useScan(url: string, router: Router) {
+function useScan(url: string, router: NextRouter) {
     const combinedUrl: string = `${process.env.apiUrl}/scan/${btoa(url)}`
     return useQuery(
         ['scan', { url }],
