@@ -1,20 +1,26 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useSharedState } from '../../store/main';
+import { Router, useRouter } from 'next/router';
 
-function useScan(url: string) {
-    const combinedUrl: string = `${process.env.apiUrl}/scan`
+function useScan(url: string, router: Router) {
+    const combinedUrl: string = `${process.env.apiUrl}/scan/${btoa(url)}`
     return useQuery(
         ['scan', { url }],
-        () => axios.post(combinedUrl, {url:url})
-          .then((res) => res.data),
-        { enabled: true, retry: false }
+        () => axios.post(combinedUrl)
+          .then((res) => res.data)
+          .catch(e => {
+            console.log(e)
+            router.push("/")
+          }),
+        { enabled: true, retry: false, staleTime: 604800 }
     );
 }
 
 export function ScanDisplay() {
+    const router = useRouter();
     const [state, setState] = useSharedState();
-    const { isLoading, isError, error, data, isFetching } = useScan(state.url);
+    const { isLoading, isError, error, data, isFetching } = useScan(state.url, router);
     
     return (
         <>
