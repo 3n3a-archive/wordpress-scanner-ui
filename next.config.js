@@ -7,4 +7,7 @@ module.exports = withBundleAnalyzer({
   eslint: {
     ignoreDuringBuilds: true,
   },
+  env: {
+    apiUrl: '/api' //'https://wpscan-api.enea.tech'
+  }
 });

@@ -1,11 +1,10 @@
-import { GetServerSidePropsContext } from 'next';
-import { useState } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useLocalStorage } from '@mantine/hooks';
 import {MainAppShell} from '../components/MainAppShell/MainAppShell';
+import { SharedStateProvider } from '../store/main';
 
 
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
@@ -28,15 +27,17 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <link rel="shortcut icon" href="/favicon.svg" />
       </Head>
 
-      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-        <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-          <NotificationsProvider>
-            <MainAppShell>
-              <Component {...pageProps} />
-            </MainAppShell>
-          </NotificationsProvider>
-        </MantineProvider>
-      </ColorSchemeProvider>
+      <SharedStateProvider>
+        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+          <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+            <NotificationsProvider>
+              <MainAppShell>
+                <Component {...pageProps} />
+              </MainAppShell>
+            </NotificationsProvider>
+          </MantineProvider>
+        </ColorSchemeProvider>
+      </SharedStateProvider>
     </>
   );
 }

@@ -1,10 +1,9 @@
+import { UrlInput } from "../components/UrlInput/UrlInput";
 
 export default function IndexPage() {
   return (
     <>
-      <p>
-        test
-      </p>
+      <UrlInput></UrlInput>
     </>
   );
 }
