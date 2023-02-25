@@ -7,7 +7,7 @@ export async function onRequestPost({ params, env }) {
         }
 
         let input_url = new URL(atob(params.url))
-        let request = new Request('https://wpscan-api.enea.tech/scan', {
+        let request = new Request('https://wordpress-scanner.fly.dev/scan', {
             method: 'POST',
             headers: {
                 'x-api-key': env.API_KEY
