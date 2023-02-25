@@ -1,5 +1,5 @@
 import { ActionIcon, Group, useMantineColorScheme } from '@mantine/core';
-import { IconSun, IconMoonStars } from '@tabler/icons';
+import { MoonStars, Sun } from 'tabler-icons-react';
 
 export function ColorSchemeToggle() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -16,9 +16,17 @@ export function ColorSchemeToggle() {
         })}
       >
         {colorScheme === 'dark' ? (
-          <IconSun size={20} stroke={1.5} />
+          <Sun
+            size={48}
+            strokeWidth={2}
+            color="black"
+          />
         ) : (
-          <IconMoonStars size={20} stroke={1.5} />
+          <MoonStars
+            size={48}
+            strokeWidth={2}
+            color="black"
+          />
         )}
       </ActionIcon>
     </Group>
